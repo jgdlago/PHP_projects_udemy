@@ -122,6 +122,77 @@ main {
     margin-right: 5px;
 }
 
+/* post */
+#post-container {
+    display: grid;
+    grid-template-columns: 75%;
+    grid-template-rows: auto;
+    grid-template-areas: "main sidebar";
+    grid-gap: 10px;
+    padding-top: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 250px;
+}
+
+.content-container {
+    grid-area: main;
+}
+
+#main-title {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+#post-description {
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.post-content {
+    line-height: 1.8;
+    margin: 10px 0;
+}
+
+.img-container {
+    margin-bottom: 30px;
+}
+
+.img-container img {
+    max-width: 60%;
+}
+
+/* post aside */
+.nav-container {
+    grid-area: sidebar;
+}
+
+#tags-title, #categories-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    background-color: #000;
+    color: #FFF;
+    text-align: center;
+    padding: 10px;
+    font-weight: 300;
+}
+
+#tags-list, #categories-list {
+    list-style: none;
+}
+
+#tags-list, #categories-list li {
+    margin-bottom: 10px;
+}
+
+#tags-list, #categories-list a {
+    color: #666;
+    transition: .5s;
+}
+
+#tags-list:hover, #categories-list:hover a {
+    color: #000;
+}
 /* footer */
 
 footer {
@@ -132,4 +203,51 @@ footer {
     background-color: #000;
     color: #FFF;
     padding: 50px 0;
+}
+
+/* mobile */
+@media(max-width: 480px) {
+    /* home */
+    header {
+        width: 100%;
+    }
+
+    #logo {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        left: 0;
+        width: 50px;
+    }
+
+    #navbar {
+        display: none;
+    }
+
+    #title-container {
+        min-width: 100%;
+        margin-top: 20px;
+    }
+
+    #post-container {
+        margin-top: 20px;
+    }
+
+    .post-box {
+        flex: 100%;
+        padding: 15px;
+        margin: 0;
+    }
+
+    /* post */
+    #post-container {
+        grid-template-columns: 100%;
+        padding: 15px;
+        grid-template-areas: "main"
+        "sidebar";
+    }
+
+    .img-container img {
+        width: 100%;
+    }
 }
