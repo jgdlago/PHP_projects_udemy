@@ -27,8 +27,36 @@
         $userData->name = $email;
         $userData->name = $bio;
 
+        // upload de imagem
+
+
         $userDAO->update($userData);
-        
+        if (isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
+
+            $image = $_FILES["image"];
+            $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
+            $jpgArray = ["image/jpeg", "image/jpg"];
+
+            if (in_array($image["type"], $imageTypes)) {
+
+                if (in_array($image, $jpgArray)) {
+                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
+                } else {
+                    $imageFile = imagecreatefrompng($image["tmp_name"]);
+                }
+
+                $imageName = $user->imageGenerateName();
+
+                imagejpeg($imageFile, "./img/users/" . $imageName, 100);
+
+                $userData->image = $imageName;
+
+            } else {
+                $message->setMessage("Tipo inválido de imagem!", "error", "back");
+            }
+
+        }
+
         // Alterar senha
     } else if ($type === "changepassword") {
 
