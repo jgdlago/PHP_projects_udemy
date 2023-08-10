@@ -23,9 +23,9 @@
         $bio = filter_input(INPUT_POST, "bio");
 
         $userData->name = $name;
-        $userData->name = $lastname;
-        $userData->name = $email;
-        $userData->name = $bio;
+        $userData->lastname = $lastname;
+        $userData->email = $email;
+        $userData->bio = $bio;
 
         // upload de imagem
 
@@ -57,9 +57,28 @@
 
         }
 
-        // Alterar senha
+    // Alterar senha
     } else if ($type === "changepassword") {
 
+        $password = filter_input(INPUT_POST, "password");
+        $confirmpassword = filter_input(INPUT_POST, "confirmpassword");
+        
+        $userData = $userDAO->verifyToken();
+        $id = $userData->id;
+
+        if ($password == $confirmpassword) {
+
+            $user = new User();
+            $finalPassord = $user->generatePassword($password);
+
+            $user->password = $finalPassord;
+            $user->id = $id;
+
+            $userDAO->changePassword($user);
+
+        } else {
+            $message->setMessage("As senhas devem ser iguais!", "error", "back");
+        }
 
     } else {
         $message->setMessage("Informação inválida!", "error", "index.php");
